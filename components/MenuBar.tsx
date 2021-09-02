@@ -9,6 +9,9 @@ export const MenuBar = () => {
 			<Link href="/user">
 				<button>Users</button>
 			</Link>
+			<Link href="/bootcamp">
+				<button>Bootcamps</button>
+			</Link>
 		</div>
 	);
 };
