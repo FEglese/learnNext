@@ -2,19 +2,20 @@ export interface BootcampDetails {
 	slug: string;
 	name: string;
 	description: number;
-  careers: string[];
+	careers: string[];
 }
 
 export const getAllBootcamps = () => {
-  // TODO: Make this url a process env
-  return fetch('http://localhost:5000/api/v1/bootcamps')
-  .then(data => data.json())
-  .then(data => data.data);
-}
+	const ALL_BOOTCAMP_URL = process.env.API_BASE_URL + "/api/v1/bootcamps";
+	return fetch(ALL_BOOTCAMP_URL)
+		.then((data) => data.json())
+		.then((data) => data.data);
+};
 
-export const getBootcampBySlug = (slug : string) => {
-  // TODO: Make this url a process env
-  return fetch(`http://localhost:5000/api/v1/bootcamps?slug=${slug}`)
-  .then(data => data.json())
-  .then(data => data.data);
-}
+export const getBootcampBySlug = (slug: string) => {
+	const BOOTCAMP_BY_SLUG_URL =
+		process.env.API_BASE_URL + `/api/v1/bootcamps?slug=${slug}`;
+	return fetch(BOOTCAMP_BY_SLUG_URL)
+		.then((data) => data.json())
+		.then((data) => data.data);
+};
