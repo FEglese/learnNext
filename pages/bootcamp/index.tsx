@@ -8,14 +8,19 @@ import { MenuBar } from "../../components/MenuBar";
 import styles from "../../components/Layout.module.css";
 
 // Services
-import { getAllBootcamps } from "../../services/BootCampService";
+import { getBootcampIndexDetails } from "../../services/BootCampService";
 
-export interface UserHomeProps {
-	allBootcamps: any[];
+interface BootcampListObject {
+	slug: string;
+	name: string;
+}
+
+export interface BootcampIndexProps {
+	allBootcamps: BootcampListObject[];
 }
 
 export async function getStaticProps() {
-	const allBootcamps = await getAllBootcamps();
+	const allBootcamps = (await getBootcampIndexDetails()) as BootcampIndexProps;
 
 	return {
 		props: { allBootcamps },
@@ -23,7 +28,7 @@ export async function getStaticProps() {
 	};
 }
 
-export default function UserHome(props: UserHomeProps) {
+export default function UserHome(props: BootcampIndexProps) {
 	const bootcampList = props.allBootcamps.map((bootcamp) => {
 		return (
 			<Link href={"/bootcamp/" + bootcamp.slug}>
