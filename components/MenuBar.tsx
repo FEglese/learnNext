@@ -12,6 +12,9 @@ export const MenuBar = () => {
 			<Link href="/bootcamp">
 				<button>Bootcamps</button>
 			</Link>
+			<Link href="/login">
+				<button>Login</button>
+			</Link>
 		</div>
 	);
 };
