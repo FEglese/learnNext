@@ -1,13 +1,21 @@
+// Packages
 import { useState } from "react";
-import styles from "./Layout.module.css";
-import { sendLoginRequest } from "../services/AuthService";
+
+// Style
+import styles from "./Styles/Login.module.scss";
+
+// Services
+import { sendLoginRequest, setJWT } from "../services/AuthService";
 
 export interface LoginProps {}
 
 export const Login = (props: LoginProps) => {
+	// Form properties
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [isInputDissabled, setInputDisabled] = useState<boolean>(false);
+
+	// Page status
 	const [errorMessage, setErrorMessage] = useState<string>(null);
 	const [successMessage, setSuccessMessage] = useState<string>(null);
 
@@ -21,10 +29,10 @@ export const Login = (props: LoginProps) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		handleLogin();
+		logUserIn();
 	};
 
-	const handleLogin = () => {
+	const logUserIn = () => {
 		setErrorMessage("");
 		setSuccessMessage("");
 
@@ -37,7 +45,7 @@ export const Login = (props: LoginProps) => {
 		sendLoginRequest(email, password)
 			.then((res) => {
 				if (res.success) {
-					setSuccessMessage("Loggged in!");
+					document.location.href = "/";
 				} else {
 					setErrorMessage(res.error);
 				}
@@ -46,16 +54,17 @@ export const Login = (props: LoginProps) => {
 				setErrorMessage("Error occured, please try again later.");
 			})
 			.finally(() => {
+				setPassword("");
 				setInputDisabled(false);
 			});
 	};
 
 	return (
 		<div className={styles.body}>
-			<h2>Login here!</h2>
+			<h2>Login</h2>
 			{errorMessage && <h4>{errorMessage}</h4>}
 			{successMessage && <h4>{successMessage}</h4>}
-			<form onSubmit={handleSubmit}>
+			<form className={styles.form} onSubmit={handleSubmit}>
 				<label>
 					Email address:
 					<input

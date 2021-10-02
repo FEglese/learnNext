@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 import { MenuBar } from "../../components/MenuBar";
 
 // Style
-import styles from "../../components/Layout.module.css";
+import styles from "../../components/Styles/Layout.module.css";
 
 // Services
 import { getAllUsers, UserDetails } from "../../services/UserService";
@@ -23,21 +23,31 @@ export async function getStaticProps() {
 }
 
 export default function UserHome(props: UserHomeProps) {
-	const userList = props.allUsers.map((user) => {
+	const userListItems = props.allUsers?.map((user) => {
 		return (
-			<Link href={"/user/" + user.id}>
-				<li className={styles.li}>{user.name}</li>
-			</Link>
+			<li className={styles.li} key={user.id}>
+				<Link href={"/user/" + user.id}>
+					<a>{user.name}</a>
+				</Link>
+			</li>
 		);
 	});
+
+	const usersExist: boolean = userListItems != null;
 
 	return (
 		<Layout>
 			<MenuBar />
 			<h1>User Home!</h1>
 
-			<h2>Users available to you:</h2>
-			<ul>{userList}</ul>
+			{usersExist && (
+				<>
+					<h2>Users available to you:</h2>
+					<ul>{userListItems}</ul>
+				</>
+			)}
+
+			{!usersExist && <h3>No users found</h3>}
 		</Layout>
 	);
 }

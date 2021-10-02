@@ -77,7 +77,7 @@ export default function Bootcamp({ bootcampData }: BootcampProps) {
 
 	const AvailableCarrers = bootcampData.careers
 		? bootcampData.careers.map((career) => {
-				return <li>{career}</li>;
+				return <li key={career}>{career}</li>;
 		  })
 		: [];
 

@@ -1,0 +1,23 @@
+$button_primary: #0070f3;
+$button_secondary: #0070f3;
+
+.menuBar {
+	align-content: center;
+
+	button {
+		background-color: white;
+		color: $button_primary;
+		border: 2px solid $button_primary;
+		padding: 0.5rem 1rem;
+		border-radius: 10px;
+		font-size: 1rem;
+		margin-right: 10px;
+		transition: 0.2s;
+		cursor: pointer;
+
+		&:hover {
+			background-color: $button_secondary;
+			color: white;
+		}
+	}
+}

@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 import { MenuBar } from "../../components/MenuBar";
 
 // Style
-import styles from "../../components/Layout.module.css";
+import styles from "../../components/Styles/Layout.module.css";
 
 // Services
 import { getBootcampIndexDetails } from "../../services/BootCampService";
@@ -31,9 +31,11 @@ export async function getStaticProps() {
 export default function UserHome(props: BootcampIndexProps) {
 	const bootcampList = props.allBootcamps.map((bootcamp) => {
 		return (
-			<Link href={"/bootcamp/" + bootcamp.slug}>
-				<li className={styles.li}>{bootcamp.name}</li>
-			</Link>
+			<li className={styles.li} key={bootcamp.slug}>
+				<Link href={"/bootcamp/" + bootcamp.slug}>
+					<a> {bootcamp.name}</a>
+				</Link>
+			</li>
 		);
 	});
 
